@@ -12,7 +12,13 @@ const initialState = {
 
 // reducer
 function reducer(state = initialState, action) {
-    if (action.type === "restart") return initialState
+    if (action.type === "restart") return produce(state, draft => {
+        draft.player1 = 0
+        draft.player2 = 0
+        draft.playing = true
+        draft.winner = null
+        draft.advantage = null
+    })
     if (action.type === "playPause") return { ...state, playing: !state.playing }
 
     if (action.type === "pointScored") {

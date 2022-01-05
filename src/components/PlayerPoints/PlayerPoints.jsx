@@ -1,10 +1,8 @@
-import { useState } from "react"
 import { useSelector } from "react-redux"
-export default function PlayerPoints({ playerId, playerName }) {
-    const [playerScore, setPlayerScore] = useState(0)
+import { selectPlayerWins } from "../../utils/selector"
 
-    // const winner = useSelector((state) => state.winner)
-    // if (winner === playerId) setPlayerScore(playerScore + 1)
+export default function PlayerPoints({ playerId, playerName }) {
+    const playerScore = useSelector(selectPlayerWins(playerId))
     return (
         <div className="player-games">
             <p>{playerName}</p>
