@@ -10,7 +10,6 @@ export const selectDisplayText = state => {
     let displayText = ""
     const { playing, winner, advantage, player1, player2 } = state
     if (winner) displayText = `Le Joueur ${winner === "player1" ? 1 : 2} gagne`
-    else if (!playing) displayText = "C'est la pause"
     else {
         displayText = `Le score est : ${player1} - ${player2}`
         if (advantage) {
@@ -39,3 +38,5 @@ export const selectRemainPointsToWin = playerId => {
         if (currentPoints === 0) return 4
     }
 }
+
+export const selectIsPlaying = () => state => state.playing

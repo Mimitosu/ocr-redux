@@ -3,7 +3,7 @@ import Display from '../Display'
 import PointScoredButton from '../PointScoredButton'
 import ResetButton from '../ResetButton'
 import PlayPauseButton from '../PlayPauseButton'
-import PlayerScore from '../PlayerScore/PlayerScore'
+import PlayerScore from '../PlayerScore'
 function App() {
   return (
     <div>

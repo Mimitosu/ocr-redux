@@ -1,10 +1,11 @@
 import { createStore } from 'redux'
 import { produce } from 'immer'
+import { playIntervalId } from './action'
 // initial state
 const initialState = {
     player1: 0,
     player2: 0,
-    playing: true,
+    playing: false,
     winner: null,
     advantage: null,
     history: []
@@ -12,10 +13,12 @@ const initialState = {
 
 // reducer
 function reducer(state = initialState, action) {
+    if (action.type === "setPlaying") return { ...state, playing: action.payload }
     if (action.type === "restart") return produce(state, draft => {
+        if (playIntervalId) clearInterval(playIntervalId)
         draft.player1 = 0
         draft.player2 = 0
-        draft.playing = true
+        draft.playing = false
         draft.winner = null
         draft.advantage = null
     })
@@ -38,7 +41,9 @@ function reducer(state = initialState, action) {
                     && currentWinner === null
                 )
             ) return produce(state, draft => {
-                draft.winner = player;
+                if (playIntervalId) clearInterval(playIntervalId)
+                draft.winner = player
+                draft.playing = false
                 draft.history.push({
                     player1: state.player1,
                     player2: state.player2,
